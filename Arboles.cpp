@@ -11,13 +11,40 @@ struct Nodo{
 //prototipo de funcion
 void menu(int []);
 Nodo *crearNodo(int);
-void insertarNodo(Nodo *&, int n);
+void insertarNodo(Nodo *&, int);
+void mostrarArbol(Nodo *&, int);
 Nodo *arbol = NULL;
 
 int main(){
-    int arreglo[6]={10,5,15,4,8,20};
-
-    menu(arreglo);
+    //int arreglo[6]={10,5,15,4,8,20};
+    int arreglo[50];
+    int datos, opcion, contador=0, x;
+    do{
+        cout << "\nMenu" << endl;
+        cout << "1.- insertar datos" << endl;
+        cout << "2.- mostrarArbol" << endl;
+        cout << "3.- Salir" << endl;
+        cin>>opcion;
+        switch(opcion){
+            case 1:
+                cout << "total de datos:(maximo 50 valores) ";
+                cin >> datos;
+                for (size_t i = 0; i < datos; i++) {
+                  cout << "inserte: ";
+                  cin >> arreglo[i];
+                  insertarNodo(arbol,arreglo[i]);
+                }
+                cout << endl;
+                system("pause");
+                break;
+            case 2:
+                cout << "\nMostrado Arbol completo" << endl;
+                mostrarArbol(arbol, contador);
+                system("pause");
+                break;
+        }
+        system("cls");
+    }while(opcion != 3);
 	return 0;
 }
 //funcion para crear un nuevo nodo
@@ -57,35 +84,6 @@ void mostrarArbol(Nodo *&arbol, int cont){
     }
 }
 
-void menu(int arreglo []){
-    int dato, opcion, contador=0;
-    do{
-        cout << "\nMenu" << endl;
-        cout << "1.- insertar nuevo nodo" << endl;
-        cout << "2.- mostrarArbol" << endl;
-        cout << "3.- Salir" << endl;
-        cin>>opcion;
-        switch(opcion){
-            case 1:
-                cout << "insertarndo arreglo" << endl;
-
-                for (size_t i = 0; i < 6; i++) {
-                  insertarNodo(arbol, arreglo[i]);
-                  system("pause");
-                }
-
-                cout << endl;
-                system("pause");
-                break;
-            case 2:
-                cout << "\nMostrado Arbol completo" << endl;
-                mostrarArbol(arbol, contador);
-                system("pause");
-                break;
-        }
-        system("cls");
-    }while(opcion != 3);
-}
 //insertar con un arreglo y se mape solito
 //no acepte datos repetidos
 //imprima hacia abajo
