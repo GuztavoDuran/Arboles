@@ -9,15 +9,15 @@ struct Nodo{
     Nodo *derecho;
 };
 //prototipo de funcion
-void menu();
+void menu(int []);
 Nodo *crearNodo(int);
 void insertarNodo(Nodo *&, int n);
 Nodo *arbol = NULL;
 
 int main(){
-    int arreglo[10]={10,9,11,15,3,6,19,20,28,55};
+    int arreglo[6]={10,5,15,4,8,20};
 
-    menu();
+    menu(arreglo);
 	return 0;
 }
 //funcion para crear un nuevo nodo
@@ -57,7 +57,7 @@ void mostrarArbol(Nodo *&arbol, int cont){
     }
 }
 
-void menu(){
+void menu(int arreglo []){
     int dato, opcion, contador=0;
     do{
         cout << "\nMenu" << endl;
@@ -67,9 +67,13 @@ void menu(){
         cin>>opcion;
         switch(opcion){
             case 1:
-                cout << "Digite un numero" << endl;
-                cin >> dato;
-                insertarNodo(arbol, dato);
+                cout << "insertarndo arreglo" << endl;
+
+                for (size_t i = 0; i < 6; i++) {
+                  insertarNodo(arbol, arreglo[i]);
+                  system("pause");
+                }
+
                 cout << endl;
                 system("pause");
                 break;
@@ -85,4 +89,3 @@ void menu(){
 //insertar con un arreglo y se mape solito
 //no acepte datos repetidos
 //imprima hacia abajo
-
