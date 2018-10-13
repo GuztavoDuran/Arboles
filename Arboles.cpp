@@ -14,11 +14,12 @@ Nodo *crearNodo(int);
 void insertarNodo(Nodo *&, int);
 void mostrarArbol(Nodo *&, int);
 Nodo *arbol = NULL;
-
+int arreglo[50];
 int main(){
     //int arreglo[6]={10,5,15,4,8,20};
-    int arreglo[50];
+
     int datos, opcion, contador=0, x;
+    bool bandera = true;
     do{
         cout << "\nMenu" << endl;
         cout << "1.- insertar datos" << endl;
@@ -27,22 +28,38 @@ int main(){
         cin>>opcion;
         switch(opcion){
             case 1:
-                cout << "total de datos:(maximo 50 valores) ";
-                cin >> datos;
-                for (size_t i = 0; i < datos; i++) {
+              cout << "total de datos:(maximo 50 valores) ";
+              cin >> datos;
+              for (size_t i = 0; i < datos; i++) {
+                do{
                   cout << "inserte: ";
                   cin >> arreglo[i];
-                  insertarNodo(arbol,arreglo[i]);
-                }
-                cout << endl;
-                system("pause");
-                break;
+                  for (size_t j = 0; j < datos; j++) {
+                    if(i != j){
+                      if(arreglo[j] == arreglo[i]){
+                        cout << "valor repetido " << endl;
+                        bandera = false;
+                        break;
+                      }else{
+                        //arreglo[i] = x;
+                        bandera = true;
+                      }
+                    }
+                  }
+                }while (bandera != true);
+                insertarNodo(arbol,arreglo[i]);
+              }
+              cout << endl;
+              system("pause");
+              break;
+
+
             case 2:
-                cout << "\nMostrado Arbol completo" << endl;
-                mostrarArbol(arbol, contador);
-                system("pause");
-                break;
-        }
+              cout << "\nMostrado Arbol completo" << endl;
+              mostrarArbol(arbol, contador);
+              system("pause");
+              break;
+        }//fin de switch
         system("cls");
     }while(opcion != 3);
 	return 0;
