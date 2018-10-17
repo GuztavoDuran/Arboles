@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <conio.h>
+#include <iomanip>
 using namespace std;
 
 struct Nodo{
@@ -13,18 +14,24 @@ void menu(int []);
 Nodo *crearNodo(int);
 void insertarNodo(Nodo *&, int);
 void mostrarArbol(Nodo *&, int);
+//recorridos
+void preOrden(Nodo *&);
+void enOrden(Nodo *&);
+void postOrden(Nodo *&);
 Nodo *arbol = NULL;
 int arreglo[50];
 int main(){
     //int arreglo[6]={10,5,15,4,8,20};
 
-    int datos, opcion, contador=0, x;
+    int datos, opcion, contador=5, x;
     bool bandera = true;
     do{
         cout << "\nMenu" << endl;
         cout << "1.- insertar datos" << endl;
         cout << "2.- mostrarArbol" << endl;
-        cout << "3.- Salir" << endl;
+        cout << "3.- Recorridos" << endl;
+        cout << "4.- Salir" << endl;
+
         cin>>opcion;
         switch(opcion){
             case 1:
@@ -59,9 +66,20 @@ int main(){
               mostrarArbol(arbol, contador);
               system("pause");
               break;
+
+            case 3:
+              cout << "Recorridos " << endl;
+              cout << "\n\n En orden   :  ";   enOrden(arbol);
+              cout << "\n\n Pre Orden  :  ";   preOrden(arbol);
+              cout << "\n\n Post Orden :  ";   postOrden(arbol);
+              cout << endl << endl;
+              system("pause");
+              break;
+            case 4:
+              break;
         }//fin de switch
         system("cls");
-    }while(opcion != 3);
+    }while(opcion != 4);
 	return 0;
 }
 //funcion para crear un nuevo nodo
@@ -90,17 +108,34 @@ void insertarNodo(Nodo *&arbol, int n){
 
 void mostrarArbol(Nodo *&arbol, int cont){
     if(arbol == NULL){//si el arbol esta vacio
-        return;
+      return;
     }else{//si el arbol tiene un nodo o mas
-        mostrarArbol(arbol->derecho, cont+1);
-        for(int i=0; i<cont;i++){
-            cout << "   ";
-        }
-        cout << arbol->dato << endl;
-        mostrarArbol(arbol->izquierdo, cont+1);
+      if(cont == 0){
+
+      }
+        cout << arbol->dato;//se imprime la raiz
+
     }
 }
 
-//insertar con un arreglo y se mape solito
-//no acepte datos repetidos
-//imprima hacia abajo
+void preOrden(Nodo *&arbol){
+  if(arbol!=NULL){
+    cout << arbol->dato <<" ";
+    preOrden(arbol->izquierdo);
+    preOrden(arbol->derecho);
+  }
+}
+void enOrden(Nodo *&arbol){
+  if(arbol!=NULL){
+    enOrden(arbol->izquierdo);
+    cout << arbol->dato << " ";
+    enOrden(arbol->derecho);
+  }
+}
+void postOrden(Nodo *&arbol){
+  if(arbol!=NULL){
+    postOrden(arbol->izquierdo);
+    postOrden(arbol->derecho);
+    cout << arbol->dato << " ";
+  }
+}
