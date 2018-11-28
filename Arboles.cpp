@@ -13,7 +13,7 @@ struct Nodo{
 void menu(int []);
 Nodo *crearNodo(int);
 void insertarNodo(Nodo *&, int);
-void mostrarArbol(Nodo *&, int);
+void mostrarArbol(Nodo *&, int,int);
 //recorridos
 void preOrden(Nodo *&);
 void enOrden(Nodo *&);
@@ -23,7 +23,7 @@ int arreglo[50];
 int main(){
     //int arreglo[6]={10,5,15,4,8,20};
 
-    int datos, opcion, contador=5, x;
+    int datos, opcion, contador=0, x;
     bool bandera = true;
     do{
         cout << "\nMenu" << endl;
@@ -63,7 +63,10 @@ int main(){
 
             case 2:
               cout << "\nMostrado Arbol completo" << endl;
-              mostrarArbol(arbol, contador);
+              for (size_t i = 0; i < 10; i++) {
+                mostrarArbol(arbol,contador,i);
+                cout << endl;
+              }
               system("pause");
               break;
 
@@ -106,15 +109,15 @@ void insertarNodo(Nodo *&arbol, int n){
     }
 }
 
-void mostrarArbol(Nodo *&arbol, int cont){
+void mostrarArbol(Nodo *&arbol, int cont, int i){
     if(arbol == NULL){//si el arbol esta vacio
       return;
     }else{//si el arbol tiene un nodo o mas
-      if(cont == 0){
-
+      mostrarArbol(arbol->izquierdo, cont+1, i);
+      if(cont == i){
+        cout << setw(10-i) << arbol->dato;
       }
-        cout << arbol->dato;//se imprime la raiz
-
+      mostrarArbol(arbol->derecho, cont+1, i);
     }
 }
 
